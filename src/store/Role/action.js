@@ -27,3 +27,27 @@ export const getRoleThunk = () => (dispatch) => {
 		}
 	)
 }
+
+export const changeRoleThunk = (data) => (dispatch) => {
+	roleAPI
+		.change(data)
+		.then((data) => {
+			dispatch(getRoleThunk())
+			message.success('Данные изменены успешно')
+		})
+		.catch((error) => {
+			return message.error('Ошибка сервера')
+		})
+}
+
+export const deleteRoleThunk = (data) => (dispatch) => {
+	roleAPI
+		.delete(data)
+		.then((data) => {
+			dispatch(getRoleThunk())
+			message.success('Данные удалены успешно')
+		})
+		.catch((error) => {
+			return message.error('Ошибка сервера')
+		})
+}

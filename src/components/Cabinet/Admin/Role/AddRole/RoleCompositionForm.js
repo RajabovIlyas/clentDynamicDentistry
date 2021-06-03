@@ -62,7 +62,7 @@ const RoleDocumentForm = ({ field }) => {
 								style={{ width: '60%' }}
 								icon={<PlusOutlined />}
 							>
-								Add field
+								Добавить доступ
 							</Button>
 							<Form.ErrorList errors={errors} />
 						</Form.Item>
