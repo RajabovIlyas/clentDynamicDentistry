@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const mainUrl='http://localhost:5000';
+const mainUrl='http://80.78.247.63:5000';
 
 const apiFetch = (url, options = {}, token) => {
     const apiUrl = mainUrl + url;
