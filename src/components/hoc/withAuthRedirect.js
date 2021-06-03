@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {getUserThunk} from "../store/auth_reducer";
 
 const mapStateToPropsForEmployeeRedirect=(state)=>({
     isAuth: state.Auth.isAuth,
@@ -14,7 +13,7 @@ export const withAuthUserRedirect=(Component)=>{
     class RedirectComponent extends React.Component{
         render() {
             if(!this.props.isAuth) {
-                return <Redirect to={'/sign-up'}/>;
+                return <Redirect to={'/'}/>;
             }
             return <Component {...this.props}/>
         }
@@ -33,7 +32,7 @@ export const withAuthRedirect=(Component)=>{
 
     class RedirectComponent extends React.Component{
         render() {
-            if(!this.props.isAuth||!this.props.admin) return <Redirect to='/sign-up'/>;
+            if(!this.props.isAuth||!this.props.admin) return <Redirect to='/'/>;
             return <Component {...this.props}/>
         }
     }

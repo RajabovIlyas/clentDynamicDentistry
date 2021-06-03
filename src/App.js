@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import LogIn from "./components/LogIn/LogIn";
+import {useDispatch} from "react-redux";
+import {getUserThunk} from "./store/Auth/action";
+import Cabinet from "./components/Cabinet/Cabinet";
+import NotFound from "./components/common/NotFound/NotFound";
 
-function App() {
+
+
+
+const App=()=> {
+    const dispatch=useDispatch();
+    useEffect(()=>{
+        const token=localStorage.getItem('TOKEN_USER');
+        if(token){
+            dispatch(getUserThunk())
+        }
+    },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+          <Switch>
+              <Route path='/cabinet' component={Cabinet}/>
+              <Route path='/' exact component={LogIn}/>
+              <Route path='/' component={NotFound}/>
+          </Switch>
+      </Router>
   );
 }
 
