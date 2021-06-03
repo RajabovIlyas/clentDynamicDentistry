@@ -1,0 +1,29 @@
+.layout {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerLayout {
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 0 50px 0 50px;
+  border-radius: 8px;
+}
+
+.input {
+  width: 100% !important;
+  border-color: #e31e24 !important;
+}
+
+.button {
+  border-radius: 2px;
+}
+
+.logo {
+  height: 60px;
+  margin-bottom: 20px;
+}
