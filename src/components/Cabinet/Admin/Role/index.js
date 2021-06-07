@@ -9,10 +9,10 @@ const Role = () => {
 	return (
 		<Tabs defaultActiveKey='1' centered={true}>
 			<TabPane tab='Добавить Роль' key='1'>
-				<AddRole/>
+				<AddRole />
 			</TabPane>
-			<TabPane tab='Изменить Роль' key='2'>
-				<ChangeRole/>
+			<TabPane tab='Управление ролями' key='2'>
+				<ChangeRole />
 			</TabPane>
 		</Tabs>
 	)

@@ -1,18 +1,11 @@
 import React, {useState} from 'react';
-import {Layout, Menu, Breadcrumb, Avatar, Button} from 'antd';
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined, SettingOutlined,
-} from '@ant-design/icons';
+import {Layout, Menu} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {logoutThunk} from "../../store/Auth/action";
 import {compose} from "redux";
 import {withAuthUserRedirect} from "../hoc/withAuthRedirect";
-import {setting, dataMenu} from './data';
+import DataMenu, {setting} from './data';
 import {NavLink, Route} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -39,8 +32,7 @@ const Cabinet = () => {
     const user = useSelector(state => state.Auth);
 
     const roleUser={
-        subdivision: user.role[user.role.length-1].subdivision,
-        role:user.role[user.role.length-1].role,
+        role:user.role[user.role.length-1].role.roleComposition,
     }
 
     const onCollapse = collapsed => {
@@ -51,10 +43,10 @@ const Cabinet = () => {
     const logout=()=>{
         dispatch(logoutThunk());
     }
-    const menuUser=Array.isArray(dataMenu[roleUser.subdivision])?
-        [...dataMenu[roleUser.subdivision],...setting]:
-       roleUser.role.map(value=> dataMenu[roleUser.subdivision][value]).flat().push(...setting)
-       
+    const menuUser=roleUser.role.map(value=>value.roleaccess.map(value=>DataMenu[value.keyName]))
+    .flat().filter((x)=> {
+        return x !== undefined;
+   })
     return (
         <Layout style={{minHeight: '100vh'}}>
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>

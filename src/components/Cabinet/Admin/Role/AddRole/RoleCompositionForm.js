@@ -1,79 +1,16 @@
 import React from 'react'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 
-import { Button, Form, Input, Space } from 'antd'
+import { Button, Form, Input, Space, Checkbox } from 'antd'
+import { useSelector } from 'react-redux'
 
-const RoleDocumentForm = ({ field }) => {
-	return (
-		<div
-			style={{
-				padding: '20px',
-				border: ' 1px solid black',
-			}}
-		>
-			<Form.List
-				{...field}
-				label='Доступ'
-				name={[field.name, 'document']}
-				fieldKey={[field.fieldKey, 'document']}
-				rules={[
-					{
-						validator: async (_, names) => {
-							if (!names || names.length < 1) {
-								return Promise.reject(new Error('Должно быть минимум 1'))
-							}
-						},
-					},
-				]}
-			>
-				{(fields, { add, remove }, { errors }) => (
-					<>
-						{fields.map((field, index) => (
-							<Form.Item key={field.key + index} required={true} label='Доступ'>
-								<Form.Item
-									{...field}
-                                    label='Доступ'
-									rules={[
-										{
-											required: true,
-											whitespace: true,
-											message: 'Заполните данную ячейку!',
-										},
-									]}
-									noStyle
-								>
-									<Input
-										placeholder='Введите данные'
-										style={{ width: '60%' }}
-									/>
-								</Form.Item>
-								{fields.length > 1 ? (
-									<MinusCircleOutlined
-										className='dynamic-delete-button'
-										onClick={() => remove(field.name)}
-									/>
-								) : null}
-							</Form.Item>
-						))}
-						<Form.Item>
-							<Button
-								type='dashed'
-								onClick={() => add()}
-								style={{ width: '60%' }}
-								icon={<PlusOutlined />}
-							>
-								Добавить доступ
-							</Button>
-							<Form.ErrorList errors={errors} />
-						</Form.Item>
-					</>
-				)}
-			</Form.List>
-		</div>
-	)
-}
 
 const RoleCompositionForm = (props) => {
+	const rolesAccess=useSelector(state=>state.RoleAccess.rolesAccess);
+	const options=[];
+    rolesAccess.forEach(value => {
+        options.push({value:value._id,label:value.name})
+    })
 	return (
 		<Form.List
 			name='roleComposition'
@@ -101,7 +38,15 @@ const RoleCompositionForm = (props) => {
 								border: ' 1px solid black',
 							}}
 						>
-							<RoleDocumentForm field={field} />
+						<Form.Item name={[field.name, "roleaccess"]} fieldKey={[field.fieldKey, 'roleaccess']} label="Доступ"
+                       rules={[
+                           {
+                               required: true,
+                               message: 'Выберите хотя бы один вариант!',
+                           },
+                       ]}>
+							<Checkbox.Group options={options}/>
+							</Form.Item>
 							<Form.Item
 								{...field}
 								label='Роль'
