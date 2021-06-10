@@ -5,7 +5,7 @@ const mainLocalUrl='http://localhost:5000';
 
 
 const apiFetch = (url, options = {}, token) => {
-    const apiUrl = mainUrl + url;
+    const apiUrl = mainLocalUrl + url;
     if (token) {
         return axios(apiUrl, {
             ...options,

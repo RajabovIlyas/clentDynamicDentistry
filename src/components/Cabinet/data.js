@@ -10,6 +10,7 @@ import Setting from './Setting/Setting'
 import Role from './Admin/Role'
 import User from './Admin/User'
 import RoleAccess from './Admin/RoleAccess'
+import DocumentType from './Admin/DocumentType'
 
 export default {
     ADD_ACCESS: {
@@ -32,6 +33,13 @@ export default {
 		url: '/cabinet/user',
 		icon: <EditOutlined />,
 		component: User,
+	},
+	ADD_DOCUMENT_TYPE: {
+		id: '8a65d21a-0fb1-416b-9d34-6318f8a7ec27',
+		name: 'Работа с типами документов',
+		url: '/cabinet/document-type',
+		icon: <EditOutlined />,
+		component: DocumentType,
 	},
 }
 
