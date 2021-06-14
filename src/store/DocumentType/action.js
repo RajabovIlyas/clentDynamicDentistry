@@ -2,8 +2,10 @@ import documentTypeAPI from './api'
 import { message } from 'antd'
 
 export const SET_DOCUMENT_TYPE_DATA = 'SET_DOCUMENT_TYPE_DATA'
+export const SET_TYPE_FIELD_DATA='SET_TYPE_FIELD_DATA'
 
 const setDocumentTypeDataAction = (data) => ({ type: SET_DOCUMENT_TYPE_DATA, data })
+const setTypeFieldDataAction = (data) => ({ type: SET_TYPE_FIELD_DATA, data })
 
 export const addDocumentTypeThunk = (data) => (dispatch) => {
 	documentTypeAPI
@@ -21,6 +23,17 @@ export const getDocumentTypeThunk = () => (dispatch) => {
 	documentTypeAPI.getAll().then(
 		(data) => {
 			dispatch(setDocumentTypeDataAction(data))
+		},
+		(error) => {
+			return message.error('Ошибка сервера')
+		}
+	)
+}
+
+export const getTypeFieldThunk = () => (dispatch) => {
+	documentTypeAPI.getTypeField().then(
+		(data) => {
+			dispatch(setTypeFieldDataAction(data))
 		},
 		(error) => {
 			return message.error('Ошибка сервера')
