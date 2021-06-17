@@ -24,7 +24,7 @@ const AddDocumentType = () => {
 		dispatch(getTypeFieldThunk())
 	}, [])
 	return (
-		<Form onFinish={onSubmit} name='addRoleAccess' layout='vertical'>
+		<Form onFinish={onSubmit} name='addDocumentType' layout='vertical'>
 			<FormDocumentType/>
 		</Form>
 	)

@@ -25,9 +25,9 @@ const ChangeDocumentType = () => {
 	}
 	return (
 		<div>
-			{documentsType.map((role) => (
+			{documentsType.map((document) => (
 				<div
-					key={role._id}
+					key={document._id}
 					style={{
 						margin: '20px',
 						padding: '10px',
@@ -39,19 +39,19 @@ const ChangeDocumentType = () => {
 							<Button
 								type={'primary'}
 								onClick={() =>
-									dispatch(deleteDocumentTypeThunk({ id: role._id }))
+									dispatch(deleteDocumentTypeThunk({ id: document._id }))
 								}
 								danger
 							>
 								Удалить
 							</Button>
 						}
-						title={'Название типа документа: ' + role.name}
+						title={'Название типа документа: ' + document.name}
 					>
 						<Descriptions.Item label={'Ключевое название '}>
-							{role.keyName}
+							{document.keyName}
 						</Descriptions.Item>
-						{role.fields.map((value) => (
+						{document.fields.map((value) => (
 							<Descriptions.Item label={'Поле '+ value.name}>
 								{value.type}
 							</Descriptions.Item>
@@ -60,10 +60,10 @@ const ChangeDocumentType = () => {
 					<Collapse>
 						<Panel header='Изменить данные' key='1'>
 							<Form
-								onFinish={(data) => onSubmit({ id: role._id, ...data })}
-								name={'changeDocumentType ' + role._id}
+								onFinish={(data) => onSubmit({ id: document._id, ...data })}
+								name={'changeDocumentType ' + document._id}
 								initialValues={{
-									...role,
+									...document,
 								}}
 								layout='vertical'
 							>

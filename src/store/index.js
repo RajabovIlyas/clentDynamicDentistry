@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import authReducer from './Auth/index'
-import roleReducer from './Role/index'
-import userReducer from './User/index'
-import roleAccessReducer from './RoleAccess/index'
-import documentTypeReducer from './DocumentType/index'
+import authReducer from './Auth'
+import roleReducer from './Role'
+import userReducer from './User'
+import roleAccessReducer from './RoleAccess'
+import documentTypeReducer from './DocumentType'
+import directoryReducer from './Directory'
+
 
 let reducers = combineReducers({
 	Auth: authReducer,
@@ -13,6 +15,7 @@ let reducers = combineReducers({
 	RoleAccess: roleAccessReducer,
     User: userReducer,
 	DocumentType: documentTypeReducer,
+	Directory: directoryReducer,
 })
 
 let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
