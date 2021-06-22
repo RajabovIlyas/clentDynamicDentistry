@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tabs } from 'antd'
-import AddRole from './AddRole/AddRole'
+import AddRole from './AddRole'
 import ChangeRole from './ChangeRole'
 
 const { TabPane } = Tabs

@@ -18,11 +18,11 @@ const FormDirectory = () => {
 		dispatch(getTypeFieldThunk())
 		dispatch(getDirectoryThunk())
 	}, [])
-	
+
 	return (
 		<>
 			<Form.Item
-				label='Наименование документа'
+				label='Наименование справочника'
 				name='name'
 				rules={[
 					{
@@ -119,11 +119,6 @@ const FormDirectory = () => {
 					</>
 				)}
 			</Form.List>
-			<Form.Item>
-				<Button type='primary' htmlType='submit'>
-					Добавить
-				</Button>
-			</Form.Item>
 		</>
 	)
 }

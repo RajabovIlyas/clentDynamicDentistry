@@ -21,6 +21,11 @@ const AddDirectory = () => {
 	return (
 		<Form onFinish={onSubmit} name='addDirectory' layout='vertical'>
 			<FormDirectory/>
+			<Form.Item>
+				<Button type='primary' htmlType='submit'>
+					Добавить
+				</Button>
+			</Form.Item>
 		</Form>
 	)
 }

@@ -7,15 +7,20 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { getTypeFieldThunk } from '../../../../store/DocumentType/action'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { getDirectoryThunk } from '../../../../store/Directory/action'
 
 const { Option } = Select
+
 
 const FormDocumentType = () => {
 	const dispatch = useDispatch()
 	const types = useSelector((state) => state.DocumentType.types)
+	const directoryes = useSelector((state) => state.Directory.directoryes)
 	useEffect(() => {
 		dispatch(getTypeFieldThunk())
+		dispatch(getDirectoryThunk())
 	}, [])
+
 	return (
 		<>
 			<Form.Item
@@ -25,25 +30,6 @@ const FormDocumentType = () => {
 					{
 						required: true,
 						message: 'Введите данные!',
-					},
-				]}
-			>
-				<Input />
-			</Form.Item>
-			<Form.Item
-				label='Ключ доступа на аглийском языке к документу'
-				name='keyName'
-				rules={[
-					{
-						required: true,
-						message: 'Введите данные!',
-					},
-					{
-						transform: (value) => {
-							let regexp = /[\w]+$/i
-							return regexp.test(value) ? value : false
-						},
-						message: 'Разрешены только латинские символы!',
 					},
 				]}
 			>
@@ -59,14 +45,17 @@ const FormDocumentType = () => {
 								align='baseline'
 							>
 								<Form.Item
+								label='Название поля'
 									{...restField}
 									name={[name, 'name']}
 									fieldKey={[fieldKey, 'name']}
 									rules={[{ required: true, message: 'Заполните значение' }]}
 								>
+
 									<Input placeholder='Название поля' />
 								</Form.Item>
 								<Form.Item
+								label='Тип'
 									{...restField}
 									name={[name, 'type']}
 									fieldKey={[fieldKey, 'type']}
@@ -94,11 +83,54 @@ const FormDocumentType = () => {
 					</>
 				)}
 			</Form.List>
-			<Form.Item>
-				<Button type='primary' htmlType='submit'>
-					Добавить
-				</Button>
-			</Form.Item>
+			<Form.List name='legacy'>
+				{(fields, { add, remove }) => (
+					<>
+						{fields.map(({ key, name, fieldKey, ...restField }) => (
+							<Space
+								key={key}
+								style={{ display: 'flex', marginBottom: 8 }}
+								align='baseline'
+							>
+							<Form.Item
+								label='Название поля'
+									{...restField}
+									name={[name, 'name']}
+									fieldKey={[fieldKey, 'name']}
+									rules={[{ required: true, message: 'Заполните значение' }]}
+								>
+
+									<Input placeholder='Название поля' />
+								</Form.Item>
+								<Form.Item
+								label='Справочник'
+									{...restField}
+									name={[name,'directory']}
+									fieldKey={[fieldKey, 'directory']}
+									rules={[{ required: true, message: 'Выберите справочник' }]}
+								>
+									<Select style={{ width: '300px' }}>
+										{directoryes.map((data) => (
+											<Option value={data._id}>Название {data.name} (поля: {data.fields.map(value=>value.name+', ')})</Option>
+										))}
+									</Select>
+								</Form.Item>
+								<MinusCircleOutlined onClick={() => remove(name)} />
+							</Space>
+						))}
+						<Form.Item>
+							<Button
+								type='dashed'
+								onClick={() => add()}
+								block
+								icon={<PlusOutlined />}
+							>
+								Добавить поля другого справочника
+							</Button>
+						</Form.Item>
+					</>
+				)}
+			</Form.List>
 		</>
 	)
 }

@@ -36,14 +36,14 @@ const ChangeUser = () => {
 					<Descriptions title={user.firstName + ' ' + user.lastName}>
 						<Descriptions.Item label='email'>{user.email}</Descriptions.Item>
 						<Descriptions.Item label='Роль'>
-							{user.role[user.role.length - 1].role.name}
+							{user?.role[user.role.length - 1]?.role.name}
 						</Descriptions.Item>
 					</Descriptions>
 					<Collapse>
 						<Panel header='Изменить роль' key='1'>
 							<Form
 								initialValues={{
-									role: user.role[user.role.length - 1].role._id,
+									role: user?.role[user.role.length - 1]?.role._id,
 								}}
 								onFinish={onSubmitChangeRole}
 								name={'changeRole' + user._id}

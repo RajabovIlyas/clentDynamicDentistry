@@ -26,6 +26,11 @@ const AddDocumentType = () => {
 	return (
 		<Form onFinish={onSubmit} name='addDocumentType' layout='vertical'>
 			<FormDocumentType/>
+			<Form.Item>
+				<Button type='primary' htmlType='submit'>
+					Добавить
+				</Button>
+			</Form.Item>
 		</Form>
 	)
 }

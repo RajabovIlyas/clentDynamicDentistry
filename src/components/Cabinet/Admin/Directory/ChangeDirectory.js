@@ -67,6 +67,11 @@ const ChangeDirectory = () => {
 								layout='vertical'
 							>
 								<FormDirectory />
+								<Form.Item>
+				<Button type='primary' htmlType='submit'>
+					Сохранить
+				</Button>
+			</Form.Item>
 							</Form>
 						</Panel>
 					</Collapse>

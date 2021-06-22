@@ -5,11 +5,10 @@ import styled from "styled-components";
 import {logoutThunk} from "../../store/Auth/action";
 import {compose} from "redux";
 import {withAuthUserRedirect} from "../hoc/withAuthRedirect";
-import DataMenu, {setting} from './data';
+import DataMenu from './data';
 import {NavLink, Route} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
-const {SubMenu} = Menu;
 
 const Logo = styled.div`
 color:white;
@@ -32,7 +31,7 @@ const Cabinet = () => {
     const user = useSelector(state => state.Auth);
 
     const roleUser={
-        role:user.role[user.role.length-1].role.roleComposition,
+        role:user.role[user.role.length-1].role.roleaccess,
     }
 
     const onCollapse = collapsed => {
@@ -43,10 +42,12 @@ const Cabinet = () => {
     const logout=()=>{
         dispatch(logoutThunk());
     }
-    const menuUser=roleUser.role.map(value=>value.roleaccess.map(value=>DataMenu[value.keyName]))
+    const menuUser=roleUser.role.map(value=>DataMenu[value.keyName])
     .flat().filter((x)=> {
         return x !== undefined;
    })
+
+
     return (
         <Layout style={{minHeight: '100vh'}}>
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
