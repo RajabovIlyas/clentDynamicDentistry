@@ -49,9 +49,9 @@ const ChangeDirectory = () => {
 							</Descriptions.Item>
 						))}
 						{directory.legacy.map(value=>
-							value.fields.map((value) => (
-							<Descriptions.Item label={'Поле '+ value.name}>
-								{value.type}
+							value.fields.map((value1) => (
+							<Descriptions.Item label={'Поле '+ value1.name+' (Справочник '+value.name+')'}>
+								{value1.type}
 							</Descriptions.Item>
 						)))}
 					</Descriptions>

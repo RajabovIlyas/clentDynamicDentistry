@@ -25,7 +25,6 @@ const ChangeRoleAccess = () => {
 							border: ' 1px solid gray',
 						}}>
 					<Descriptions
-						extra={<Button type={'primary'} onClick={()=>dispatch(deleteRoleAccessThunk({id:role._id}))} danger>Удалить</Button>}
 						title={'Название раздела: ' + role.name}
 					>
 							<Descriptions.Item label={'Ключевое название '}>

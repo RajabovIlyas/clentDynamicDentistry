@@ -12,6 +12,7 @@ import User from './Admin/User'
 import RoleAccess from './Admin/RoleAccess'
 import DocumentType from './Admin/DocumentType'
 import Directory from './Admin/Directory'
+import DocumentData from './Admin/DocumentData'
 
 export default {
     ADD_ACCESS: {
@@ -48,6 +49,13 @@ export default {
 		url: '/cabinet/directory',
 		icon: <EditOutlined />,
 		component: Directory,
+	},
+	ADD_DOCUMENT_DATA: {
+		id: '8a65d21a-0fb1-416b-9d34-6318f8a7ec29',
+		name: 'Работа с документами',
+		url: '/cabinet/document-data',
+		icon: <EditOutlined />,
+		component: DocumentData,
 	},
 }
 

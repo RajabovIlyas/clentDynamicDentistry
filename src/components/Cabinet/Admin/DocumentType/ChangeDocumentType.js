@@ -48,14 +48,18 @@ const ChangeDocumentType = () => {
 						}
 						title={'Название типа документа: ' + document.name}
 					>
-						<Descriptions.Item label={'Ключевое название '}>
-							{document.keyName}
-						</Descriptions.Item>
 						{document.fields.map((value) => (
 							<Descriptions.Item label={'Поле '+ value.name}>
 								{value.type}
 							</Descriptions.Item>
 						))}
+						{document.legacy.map(value=>
+							<Descriptions.Item label={'Поля из справочника '+value.directory.name}>
+							{value.directory.fields.map((value1) => 
+								value1.name+': '+value1.type+', '
+								)}
+							</Descriptions.Item>
+						)}
 					</Descriptions>
 					<Collapse>
 						<Panel header='Изменить данные' key='1'>
@@ -63,7 +67,8 @@ const ChangeDocumentType = () => {
 								onFinish={(data) => onSubmit({ id: document._id, ...data })}
 								name={'changeDocumentType ' + document._id}
 								initialValues={{
-									...document,
+								...document,
+								legacy:document.legacy.map(value=>{return {directory:value.directory._id, name:value.name}}),
 								}}
 								layout='vertical'
 							>
