@@ -20,7 +20,7 @@ const AddUser = () => {
 
 	const onSubmit = (data) => {
 		dispatch(addUserThunk({...data,role:[{role:data.role}]}))
-    
+		form.resetFields();
 	}
 
 	return (

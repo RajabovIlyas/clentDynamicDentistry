@@ -1,7 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Form, Input, Space, Select, DatePicker, Divider } from 'antd'
+import { addDocumentDataThunk } from '../../../../store/DocumentData/action'
 
 const inputByType = (type) => {
 	switch (type) {
@@ -20,9 +21,11 @@ const { Option } = Select
 
 const FormDocumentData = (props) => {
 	const dispatch = useDispatch()
-
+	const user = useSelector((state) => state.Auth)
 	const onSubmit = (data) => {
-		console.log('show documentData', data)
+		dispatch(
+			addDocumentDataThunk({ ...data, name: props.name, user: user._id })
+		)
 	}
 
 	return (
@@ -46,6 +49,7 @@ const FormDocumentData = (props) => {
 					}),
 				}}
 			>
+				<Form.Item name={'user'}></Form.Item>
 				<Form.List name='data'>
 					{(fields, { add, remove }) => (
 						<>
@@ -75,8 +79,10 @@ const FormDocumentData = (props) => {
 							{fields.map((value) => (
 								<Form.List name={[value.name, 'data']}>
 									{(fields, { add, remove }) => (
-										<div >
-										<Divider>Справочник {props.legacy[value.key].name}</Divider>
+										<div>
+											<Divider>
+												Справочник {props.legacy[value.key].name}
+											</Divider>
 											{fields.map(({ key, name, fieldKey, ...restField }) => (
 												<Space
 													key={key}
@@ -84,7 +90,9 @@ const FormDocumentData = (props) => {
 													align='baseline'
 												>
 													<Form.Item
-														label={props.legacy[value.key].directory.fields[key].name}
+														label={
+															props.legacy[value.key].directory.fields[key].name
+														}
 														{...restField}
 														name={[name, 'value']}
 														fieldKey={[fieldKey, 'value']}
@@ -92,7 +100,9 @@ const FormDocumentData = (props) => {
 															{ required: true, message: 'Заполните значение' },
 														]}
 													>
-														{inputByType(props.legacy[value.key].directory.fields[key].type)}
+														{inputByType(
+															props.legacy[value.key].directory.fields[key].type
+														)}
 													</Form.Item>
 												</Space>
 											))}

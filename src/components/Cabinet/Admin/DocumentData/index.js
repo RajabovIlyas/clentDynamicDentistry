@@ -12,7 +12,7 @@ const DocumentData = () => {
 				<AddDocumentData />
 			</TabPane>
 			<TabPane tab='Просмотр документов' key='2'>
-				{/* <ShowDocumentData /> */}
+				<ShowDocumentData />
 			</TabPane>
 		</Tabs>
 	)

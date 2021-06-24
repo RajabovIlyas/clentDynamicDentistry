@@ -10,6 +10,7 @@ const AddRoleAccess = () => {
 	const [form] = Form.useForm()
 	const onSubmit = (data) => {
 		dispatch(addRoleAccessThunk(data))
+		form.resetFields();
 	}
 	return (
 		<Form form={form} onFinish={onSubmit} name='addRoleAccess' layout='vertical'>

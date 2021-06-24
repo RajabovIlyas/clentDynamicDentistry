@@ -9,9 +9,11 @@ const AddRole = () => {
 	const dispatch = useDispatch()
 	const onSubmit = (data) => {
 		dispatch(addRoleThunk(data))
+		form.resetFields();
 	}
+	const [form] = Form.useForm();
 	return (
-		<Form onFinish={onSubmit} name='addRole' layout='vertical'>
+		<Form form={form} onFinish={onSubmit} name='addRole' layout='vertical'>
 			<FormRole/>
 			<Form.Item>
 				<Button type='primary' htmlType='submit'>

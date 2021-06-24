@@ -14,7 +14,7 @@ let initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_AUTH_DATA: {
-			return { ...state, ...action.data, isAuth: true }
+			return { ...state, ...action.data, isAuth: true, id: action.data._id }
 		}
 		case SET_LOGOUT: {
 			return { ...initialState }

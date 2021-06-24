@@ -19,12 +19,14 @@ const AddDocumentType = () => {
 	const types = useSelector((state) => state.DocumentType.types)
 	const onSubmit = (data) => {
 		dispatch(addDocumentTypeThunk(data))
+		form.resetFields();
 	}
 	useEffect(() => {
 		dispatch(getTypeFieldThunk())
 	}, [])
+	const [form] = Form.useForm();
 	return (
-		<Form onFinish={onSubmit} name='addDocumentType' layout='vertical'>
+		<Form form={form} onFinish={onSubmit} name='addDocumentType' layout='vertical'>
 			<FormDocumentType/>
 			<Form.Item>
 				<Button type='primary' htmlType='submit'>

@@ -14,12 +14,14 @@ const AddDirectory = () => {
 	const dispatch = useDispatch()
 	const onSubmit = (data) => {
 		dispatch(addDirectoryThunk(data))
+		form.resetFields();
 	}
 	useEffect(() => {
 		dispatch(getTypeFieldThunk())
 	}, [])
+	const [form] = Form.useForm();
 	return (
-		<Form onFinish={onSubmit} name='addDirectory' layout='vertical'>
+		<Form  form={form} onFinish={onSubmit} name='addDirectory' layout='vertical'>
 			<FormDirectory/>
 			<Form.Item>
 				<Button type='primary' htmlType='submit'>

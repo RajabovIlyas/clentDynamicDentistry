@@ -7,6 +7,7 @@ import userReducer from './User'
 import roleAccessReducer from './RoleAccess'
 import documentTypeReducer from './DocumentType'
 import directoryReducer from './Directory'
+import documentDataReducer from './DocumentData'
 
 
 let reducers = combineReducers({
@@ -16,6 +17,7 @@ let reducers = combineReducers({
     User: userReducer,
 	DocumentType: documentTypeReducer,
 	Directory: directoryReducer,
+	DocumentData: documentDataReducer,
 })
 
 let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
