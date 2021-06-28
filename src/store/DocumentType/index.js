@@ -1,8 +1,8 @@
-import { SET_DOCUMENT_TYPE_DATA, SET_TYPE_FIELD_DATA } from './action'
+import { SET_DOCUMENT_TYPE_DATA, SET_DOCUMENT_TYPE_ONE_DATA } from './action'
 
 let initialState = {
 	documentsType: [],
-	types: [],
+	documentType:null,
 }
 
 export default (state = initialState, action) => {
@@ -10,8 +10,8 @@ export default (state = initialState, action) => {
 		case SET_DOCUMENT_TYPE_DATA: {
 			return { ...state, documentsType: action.data }
 		}
-		case SET_TYPE_FIELD_DATA: {
-			return { ...state, types: action.data }
+		case SET_DOCUMENT_TYPE_ONE_DATA: {
+			return { ...state, documentType: action.data }
 		}
 		default:
 			return state

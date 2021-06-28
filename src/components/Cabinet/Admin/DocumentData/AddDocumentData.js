@@ -1,33 +1,22 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-
-import { Select, Collapse } from 'antd'
+import {useDispatch} from 'react-redux'
 
 import {
-	getDocumentTypeThunk,
+    getDocumentTypeOneThunk,
 } from '../../../../store/DocumentType/action'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import {useEffect} from 'react'
+import {useSelector} from 'react-redux'
 import FormDocumentData from './FormDocumentType'
 
-const { Panel } = Collapse
 
-const AddDocumentData = () => {
-	const dispatch = useDispatch()
-	const documentsType = useSelector((state) => state.DocumentType.documentsType)
+const AddDocumentData = ({id}) => {
+    const dispatch = useDispatch()
+    const documentType = useSelector((state) => state.DocumentType.documentType)
+    useEffect(() => {
+        dispatch(getDocumentTypeOneThunk({id}));
+    }, [id])
 
-	useEffect(() => {
-		dispatch(getDocumentTypeThunk())
-	}, [])
-	return (
-		<Collapse>
-			{documentsType.map((value) => (
-				<Panel header={'Добавить документ: ' + value.name} key={value._id}>
-					<FormDocumentData {...value}/>
-				</Panel>
-			))}
-		</Collapse>
-	)
+    return documentType?<FormDocumentData {...documentType}/>:null;
 }
 
 export default AddDocumentData

@@ -14,18 +14,18 @@ import User from '../User'
 
 const { Panel } = Collapse
 
-const ShowDocumentData = () => {
+const ShowDocumentData = ({id}) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
-		dispatch(getDocumentDataThunk())
-	}, [])
+		dispatch(getDocumentDataThunk({id}))
+	}, [id])
 	const documents = useSelector((state) => state.DocumentData.documentsData)
 	return (
 		<>
 			<Collapse>
 				{documents.map((value) => (
 					<Panel
-						header={`Документ: ${value.name} (${value.user.firstName} ${value.user.lastName})`}
+						header={`Документ: ${value.name}`}
 						key={value._id}
 					>
 						<Descriptions title={'Документ: ' + value.name}>

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Button, Form, Input, Space, Select } from 'antd'
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { getTypeFieldThunk } from '../../../../store/DocumentType/action'
+import { getTypeFieldThunk } from '../../../../store/Directory/action'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { getDirectoryThunk } from '../../../../store/Directory/action'
@@ -14,7 +14,7 @@ const { Option } = Select
 
 const FormDocumentType = () => {
 	const dispatch = useDispatch()
-	const types = useSelector((state) => state.DocumentType.types)
+	const types = useSelector((state) => state.Directory.types)
 	const directoryes = useSelector((state) => state.Directory.directoryes)
 	useEffect(() => {
 		dispatch(getTypeFieldThunk())

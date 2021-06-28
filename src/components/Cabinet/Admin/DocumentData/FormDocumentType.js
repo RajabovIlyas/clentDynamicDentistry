@@ -24,7 +24,8 @@ const FormDocumentData = (props) => {
 	const user = useSelector((state) => state.Auth)
 	const onSubmit = (data) => {
 		dispatch(
-			addDocumentDataThunk({ ...data, name: props.name, user: user._id })
+			addDocumentDataThunk({ ...data,
+				documentType:props._id, name: props.name, user: user._id })
 		)
 	}
 

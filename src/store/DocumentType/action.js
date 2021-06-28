@@ -2,10 +2,10 @@ import documentTypeAPI from './api'
 import { message } from 'antd'
 
 export const SET_DOCUMENT_TYPE_DATA = 'SET_DOCUMENT_TYPE_DATA'
-export const SET_TYPE_FIELD_DATA='SET_TYPE_FIELD_DATA'
+export const SET_DOCUMENT_TYPE_ONE_DATA='SET_DOCUMENT_TYPE_ONE_DATA';
 
 const setDocumentTypeDataAction = (data) => ({ type: SET_DOCUMENT_TYPE_DATA, data })
-const setTypeFieldDataAction = (data) => ({ type: SET_TYPE_FIELD_DATA, data })
+const setDocumentTypeOneDataAction = (data) => ({ type: SET_DOCUMENT_TYPE_ONE_DATA, data })
 
 export const addDocumentTypeThunk = (data) => (dispatch) => {
 	documentTypeAPI
@@ -30,16 +30,17 @@ export const getDocumentTypeThunk = () => (dispatch) => {
 	)
 }
 
-export const getTypeFieldThunk = () => (dispatch) => {
-	documentTypeAPI.getTypeField().then(
+export const getDocumentTypeOneThunk = (data) => (dispatch) => {
+	documentTypeAPI.getOne(data).then(
 		(data) => {
-			dispatch(setTypeFieldDataAction(data))
+			dispatch(setDocumentTypeOneDataAction(data))
 		},
 		(error) => {
 			return message.error('Ошибка сервера')
 		}
 	)
 }
+
 
 export const changeDocumentTypeThunk = (data) => (dispatch) => {
 	documentTypeAPI

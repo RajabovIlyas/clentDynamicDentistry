@@ -13,7 +13,6 @@ export const setAuthThunk = (data) => dispatch => {
             localStorage.setItem('TOKEN_USER', data.token);
             dispatch(getUserThunk());
         }).catch((error) => {
-        console.log(error);
         return message.error("Неправильный введен логин или пароль");
     });
 };

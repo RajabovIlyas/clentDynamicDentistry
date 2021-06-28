@@ -50,21 +50,10 @@ export default {
 		icon: <EditOutlined />,
 		component: Directory,
 	},
-	ADD_DOCUMENT_DATA: {
-		id: '8a65d21a-0fb1-416b-9d34-6318f8a7ec29',
-		name: 'Работа с документами',
-		url: '/cabinet/document-data',
-		icon: <EditOutlined />,
-		component: DocumentData,
-	},
 }
 
-export const setting = [
-	{
-		id: '29258b0c-0d80-434a-bb21-19b7c78b4846',
-		name: 'Настройки рабочего стола',
-		url: '/cabinet/setting',
-		icon: <SettingOutlined />,
-		component: Setting,
-	},
-]
+export const documentAccess={
+	url: '/cabinet/document-data',
+	icon: <EditOutlined />,
+	component: DocumentData,
+}

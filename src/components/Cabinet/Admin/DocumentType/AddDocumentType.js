@@ -6,8 +6,8 @@ import { Button, Form, Input, Space, Select } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import {
 	addDocumentTypeThunk,
-	getTypeFieldThunk,
 } from '../../../../store/DocumentType/action'
+import {getTypeFieldThunk} from '../../../../store/Directory/action'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import FormDocumentType from './FormDocumentType'

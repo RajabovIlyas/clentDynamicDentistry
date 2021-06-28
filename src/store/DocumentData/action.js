@@ -9,16 +9,16 @@ export const addDocumentDataThunk = (data) => (dispatch) => {
 	documentDataAPI
 		.create(data)
 		.then((data) => {
-			dispatch(getDocumentDataThunk())
+			dispatch(getDocumentDataThunk({id:data.documentType}))
 			message.success('Данные сохранились успешно')
 		})
 		.catch((error) => {
-			return message.error('Ошибка сервера')
+			return message.error('Ошибка в сохранении данных')
 		})
 }
 
-export const getDocumentDataThunk = () => (dispatch) => {
-	documentDataAPI.getAll().then(
+export const getDocumentDataThunk = (data) => (dispatch) => {
+	documentDataAPI.getDataByDocumentTypeID(data).then(
 		(data) => {
 			dispatch(setDocumentDataAction(data))
 		},

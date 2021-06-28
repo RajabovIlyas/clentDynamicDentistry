@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {logoutThunk} from "../../store/Auth/action";
 import {compose} from "redux";
 import {withAuthUserRedirect} from "../hoc/withAuthRedirect";
-import DataMenu from './data';
+import DataMenu, {documentAccess} from './data';
 import {NavLink, Route} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -25,17 +25,19 @@ flex-direction: row;
   padding-right: 20px;
 `
 
+const { SubMenu } = Menu;
+
 const Cabinet = () => {
     const dispatch=useDispatch();
     const [collapsed, setCollapsed] = useState(false);
     const user = useSelector(state => state.Auth);
 
     const roleUser={
-        role:user.role[user.role.length-1].role.roleaccess,
+        role:user.role[user.role.length-1].role.roleAccess,
+        documentsType:user.role[user.role.length-1].role.documentAccess,
     }
 
     const onCollapse = collapsed => {
-        console.log(collapsed);
         setCollapsed(collapsed);
     };
 
@@ -47,6 +49,13 @@ const Cabinet = () => {
         return x !== undefined;
    })
 
+   const menuDocumentAccess= roleUser.documentsType.map(value=>{return {...documentAccess,id:value._id,name:value.name}})
+
+
+   //  const key=Object.keys(DataMenu);
+   //  const menuUser=key.map(value=>DataMenu[value])
+   //  console.log('menuUser', menuUser)
+   //  const menuDocumentAccess=[]
 
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -58,7 +67,13 @@ const Cabinet = () => {
                             {value.name}
                         </Menu.Item>
                     ))}
-
+                    {menuDocumentAccess.length!==0? <SubMenu key="sub2" icon={menuDocumentAccess[0].icon} title="Документы">
+                        {menuDocumentAccess.map(value=>(
+                            <Menu.Item key={value.id} icon={<NavLink to={value.url+`/${value.id}`}></NavLink>}>
+                                {value.name}
+                            </Menu.Item>
+                        ))}
+                    </SubMenu>:null}
                 </Menu>
             </Sider>
             <Layout className="site-layout">
@@ -74,6 +89,8 @@ const Cabinet = () => {
                     {menuUser.map(value=>(
                         <Route path={value.url} key={value.id+'1'} exact component={value.component}/>
                     ))}
+                    {menuDocumentAccess.length!==0?
+                        <Route path={menuDocumentAccess[0].url+'/:id'} key={menuDocumentAccess[0].id+'1'} exact component={menuDocumentAccess[0].component}/>:null}
                 </Content>
                 <Footer style={{textAlign: 'center'}}>dynamicDentistry ©2021 Created by Enzostudio</Footer>
             </Layout>

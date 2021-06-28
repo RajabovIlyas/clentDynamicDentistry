@@ -3,24 +3,32 @@ import React, { useEffect } from 'react'
 import { Form, Input, Checkbox } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRoleAccessThunk } from '../../../../store/RoleAccess/action'
+import {getDocumentTypeThunk} from "../../../../store/DocumentType/action";
 
 const FormRole = () => {
 	const rolesAccess = useSelector((state) => state.RoleAccess.rolesAccess)
+	const documentAccess = useSelector((state) => state.DocumentType.documentsType)
 	const dispatch = useDispatch()
-	const options = []
+	const optionsRole = []
 	rolesAccess.forEach((value) => {
-		options.push({ value: value._id, label: value.name })
+		optionsRole.push({ value: value._id, label: value.name })
 	})
+	const optionsDocument=[];
+	documentAccess.forEach((value) => {
+		optionsDocument.push({ value: value._id, label: value.name })
+	})
+
 
 	useEffect(() => {
 		dispatch(getRoleAccessThunk())
+		dispatch(getDocumentTypeThunk())
 	}, [])
 
 	return (
 		<>
 			<Form.Item
-				name={'roleaccess'}
-				fieldKey={'roleaccess'}
+				name={'roleAccess'}
+				fieldKey={'roleAccess'}
 				label='Доступ'
 				rules={[
 					{
@@ -29,7 +37,20 @@ const FormRole = () => {
 					},
 				]}
 			>
-				<Checkbox.Group options={options} />
+				<Checkbox.Group options={optionsRole} />
+			</Form.Item>
+			<Form.Item
+				name={'documentAccess'}
+				fieldKey={'documentAccess'}
+				label='Доступ к документам'
+				rules={[
+					{
+						required: true,
+						message: 'Выберите хотя бы один вариант!',
+					},
+				]}
+			>
+				<Checkbox.Group options={optionsDocument} />
 			</Form.Item>
 			<Form.Item
 				label='Роль'
