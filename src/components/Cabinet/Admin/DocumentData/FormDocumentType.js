@@ -37,14 +37,14 @@ const FormDocumentData = (props) => {
 				layout='vertical'
 				initialValues={{
 					data: props.fields.map((value) => {
-						return { value: '', name: value.name }
+						return { value: '', name: value.name, type:value.type }
 					}),
 					dataDirectory: props.legacy.map((value) => {
 						return {
 							directory: value._id,
 							nameDirectory: value.name,
 							data: value.directory.fields.map((value1) => {
-								return { value: '', name: value1.name }
+								return { value: '', name: value1.name, type:value.type }
 							}),
 						}
 					}),

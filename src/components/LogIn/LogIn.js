@@ -16,7 +16,7 @@ const LogIn=(props)=>{
        dispatch(setAuthThunk(values))
     };
     if(user.isAuth){
-        return <Redirect to='/cabinet'/>
+        return <Redirect to='/cabinet/business-process'/>
     }
 
 

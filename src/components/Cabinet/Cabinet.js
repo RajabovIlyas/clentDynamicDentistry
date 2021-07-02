@@ -5,8 +5,8 @@ import styled from "styled-components";
 import {logoutThunk} from "../../store/Auth/action";
 import {compose} from "redux";
 import {withAuthUserRedirect} from "../hoc/withAuthRedirect";
-import DataMenu, {documentAccess} from './data';
 import {NavLink, Route} from "react-router-dom";
+import DataMenu, {businessProcess ,documentAccess} from "./routerData";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -61,7 +61,10 @@ const Cabinet = () => {
         <Layout style={{minHeight: '100vh'}}>
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
                 <div style={{padding: '24px'}}> Logo</div>
-                <Menu theme="dark" mode="inline">
+                <Menu theme="dark" mode="inline" selectedKeys={[businessProcess.id]}>
+                    <Menu.Item key={businessProcess.id} icon={<NavLink to={businessProcess.url}>{businessProcess.icon}</NavLink>}>
+                        {businessProcess.name}
+                    </Menu.Item>
                     {menuUser.map(value=>(
                         <Menu.Item key={value.id} icon={<NavLink to={value.url}>{value.icon}</NavLink>}>
                             {value.name}
@@ -86,6 +89,7 @@ const Cabinet = () => {
                     </HeaderType>
                 </Header>
                 <Content style={{margin: '16px'}}>
+                    <Route path={businessProcess.url} key={businessProcess.id+'1'} exact component={businessProcess.component}/>
                     {menuUser.map(value=>(
                         <Route path={value.url} key={value.id+'1'} exact component={value.component}/>
                     ))}

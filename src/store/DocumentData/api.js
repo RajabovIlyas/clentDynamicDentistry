@@ -8,5 +8,6 @@ export default {
 	change: (data) => apiFetch(`${api}/${data.id}`, { method: 'put', data }, true),
 	getAll: () => apiFetch(`${api}`, { method: 'get' }, true),
 	getDataByDocumentTypeID: (data) => apiFetch(`${api}/by-document-type/${data.id}`, { method: 'get' }, true),
+	getDataByDocumentBusiness: () => apiFetch(`${api}/business-process`, { method: 'get' }, true),
 	getTypeField: () => apiFetch(`${api}/type`, { method: 'get' }, true),
 }

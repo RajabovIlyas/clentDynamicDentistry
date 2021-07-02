@@ -3,7 +3,10 @@ import { message } from 'antd'
 
 export const SET_DOCUMENT_DATA_DATA = 'SET_DOCUMENT_DATA_DATA'
 
+export const SET_DOCUMENT_DATA_BUSINESS = 'SET_DOCUMENT_DATA_BUSINESS'
+
 const setDocumentDataAction = (data) => ({ type: SET_DOCUMENT_DATA_DATA, data })
+const setDocumentDataBusinessAction = (data) => ({ type: SET_DOCUMENT_DATA_BUSINESS, data })
 
 export const addDocumentDataThunk = (data) => (dispatch) => {
 	documentDataAPI
@@ -21,6 +24,17 @@ export const getDocumentDataThunk = (data) => (dispatch) => {
 	documentDataAPI.getDataByDocumentTypeID(data).then(
 		(data) => {
 			dispatch(setDocumentDataAction(data))
+		},
+		(error) => {
+			return message.error('Ошибка сервера')
+		}
+	)
+}
+
+export const getDocumentDataBusinessThunk = () => (dispatch) => {
+	documentDataAPI.getDataByDocumentBusiness().then(
+		(data) => {
+			dispatch(setDocumentDataBusinessAction(data))
 		},
 		(error) => {
 			return message.error('Ошибка сервера')

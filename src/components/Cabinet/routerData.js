@@ -13,6 +13,7 @@ import RoleAccess from './Admin/RoleAccess'
 import DocumentType from './Admin/DocumentType'
 import Directory from './Admin/Directory'
 import DocumentData from './Admin/DocumentData'
+import BusinessProcess from "./Admin/BusinessProcess";
 
 export default {
     ADD_ACCESS: {
@@ -56,4 +57,12 @@ export const documentAccess={
 	url: '/cabinet/document-data',
 	icon: <EditOutlined />,
 	component: DocumentData,
+}
+
+export const businessProcess={
+	id: '8a65d21a-0fb1-416b-9d34-6318f8a7ec33',
+	name: 'Бизнес процесс',
+	url: '/cabinet/business-process',
+	icon: <EditOutlined />,
+	component: BusinessProcess,
 }
